@@ -33,34 +33,44 @@ def solve_v1(number):
             primeFactors.append(x)
     return primeFactors
 
-def solve_v2(number):
+def solve_v2(number, primes):
     # loop over primes, check which are divisors
+    # search up to number in case number is prime
     primeFactors = []
-    primes = getPrimes(10**4)
     i = 0
-    while i < len(primes) and primes[i] <= number // 2:
+    while i < len(primes) and primes[i] <= number:
         if number % primes[i] == 0:
             primeFactors.append(primes[i])
         i += 1
     return primeFactors
 
-#primes = getPrimes(10**4)
+primes = getPrimes(10**4)
 #print(primes)
-#print("number of primes: {0}".format(len(primes)))
+print("number of primes: {0}".format(len(primes)))
 
 #x = solve_v1(13195)
 #print("prime factors: {0}".format(x))
 #print("largest prime factor: {0}".format(max(x)))
-#
-#x = solve_v2(13195)
-#print("prime factors: {0}".format(x))
-#print("largest prime factor: {0}".format(max(x)))
+
+x = solve_v2(13195, primes)
+print("prime factors: {0}".format(x))
+print("largest prime factor: {0}".format(max(x)))
 
 #x = solve_v1(600851475143)
 #print("prime factors: {0}".format(x))
 #print("largest prime factor: {0}".format(max(x)))
 
-x = solve_v2(600851475143)
+x = solve_v2(600851475143, primes)
 print("prime factors: {0}".format(x))
 print("largest prime factor: {0}".format(max(x)))
+
+numbers = [
+    101,
+    10101,
+    1010101,
+    101010101,
+    10101010101,
+]
+for n in numbers:
+    print("{0}: {1}".format(n, solve_v2(n, primes)))
 

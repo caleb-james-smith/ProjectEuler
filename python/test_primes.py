@@ -4,9 +4,12 @@ from Primes import Primes
 
 def test():
     P = Primes()
-    P.calcPrimes(10**5)
-    primes = P.getPrimes()
-    print("number of primes: {0}".format(len(primes)))
+    limits = [10 ** i for i in range(6)]
 
+    for lim in limits:
+        P.calcPrimes(lim)
+        primes = P.getPrimes()
+        print("limit: {0:.1e}, number of primes: {1}".format(lim, len(primes)))
+    
 test()
 

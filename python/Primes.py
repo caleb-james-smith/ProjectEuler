@@ -32,10 +32,14 @@ class Primes:
         return self.twoDivs(number)
 
     def calcPrimes(self, max_val):
-        first_max = 1000
-        first_primes    = [x for x in range(1, first_max) if self.isPrime(x)]
-        second_primes   = [x for x in range(first_max, max_val + 1) if self.isPrime(x, first_primes)]
-        primes = first_primes + second_primes
+        if max_val > 1000:
+            # speed up by using first set of primes
+            first_max = 1000
+            first_primes    = [x for x in range(1, first_max) if self.isPrime(x)]
+            second_primes   = [x for x in range(first_max, max_val) if self.isPrime(x, first_primes)]
+            primes = first_primes + second_primes
+        else:
+            primes = [x for x in range(1, max_val) if self.isPrime(x)]
         self.setPrimes(primes)
 
     def setPrimes(self, primes):

@@ -40,14 +40,17 @@ def solve(n_divisors_limit):
     going = True
     while going:
         t += i
-        divs = P.divisors(t)
-        n_divs = len(divs)
-        if n_divs > current_max:
-            current_max = n_divs
-            print("{0}: t={1}, n_divs={2}".format(i, t, n_divs), flush=True)
-        #print("{0}: t={1}, n_divs={2}, {3}".format(i, t, n_divs, divs))
-        if n_divs > n_divisors_limit:
-            going = False
+        # assume divisible by 36
+        # skip otherwise to speed up
+        if t % 36 == 0:
+            divs = P.divisors(t)
+            n_divs = len(divs)
+            if n_divs > current_max:
+                current_max = n_divs
+                print("{0}: t={1}, n_divs={2}".format(i, t, n_divs), flush=True)
+            #print("{0}: t={1}, n_divs={2}, {3}".format(i, t, n_divs, divs))
+            if n_divs > n_divisors_limit:
+                going = False
         i += 1 
     return t
 

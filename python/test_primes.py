@@ -72,5 +72,5 @@ def test3(lim):
 
 #test1()
 #test2(2 * 10**5)
-test3(10**9)
+test3(10**7)
 

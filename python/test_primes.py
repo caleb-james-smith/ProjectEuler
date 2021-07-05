@@ -4,7 +4,7 @@ from Primes import Primes
 
 def test():
     P = Primes()
-    limits = [10 ** i for i in range(6)]
+    limits = [10 ** i for i in range(7)]
 
     for lim in limits:
         P.calcPrimes(lim)

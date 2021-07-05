@@ -67,16 +67,16 @@ class Primes:
             return
         # start with all numbers assigned True for prime
         # assign False to numbers that are divisible 
-        # check up to square root of number
+        # at the end, numbers still assigned True are prime
         is_prime_list = max_val * [True]
         is_prime_list[0] = False 
         is_prime_list[1] = False 
+        # check up to square root of number
         for i in range(2, int(np.sqrt(max_val)) + 1):
             if is_prime_list[i]:
-                j = 2
-                while i * j < max_val:
-                    is_prime_list[i * j] = False
-                    j += 1
+                # start from i^2 to save time
+                for j in range(i**2, max_val, i):
+                    is_prime_list[j] = False
         primes = [i for i in range(len(is_prime_list)) if is_prime_list[i]] 
         self.setPrimes(primes)
         return

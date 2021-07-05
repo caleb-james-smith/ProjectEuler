@@ -5,7 +5,7 @@ import time
 
 def test1():
     P = Primes()
-    limits = [10 ** i for i in range(7)]
+    limits = [10 ** i for i in range(6)]
 
     t0 = time.time()
     
@@ -72,5 +72,5 @@ def test3(lim):
 
 #test1()
 #test2(2 * 10**5)
-test3(10**7)
+test3(10**9)
 

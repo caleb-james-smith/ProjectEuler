@@ -40,9 +40,10 @@ def solve(n_divisors_limit):
     going = True
     while going:
         t += i
-        # assume divisible by 36
+        # assume divisible by a value
         # skip otherwise to speed up
-        if t % 36 == 0:
+        assume = 180
+        if t % assume == 0:
             divs = P.divisors(t)
             n_divs = len(divs)
             if n_divs > current_max:

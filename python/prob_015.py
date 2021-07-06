@@ -26,15 +26,41 @@ def findPaths(width, height):
         paths = new_paths
     return paths
 
+def findHalfPaths(width, height):
+    n_moves = width + height
+    paths = []
+    paths.append("")
+    for i in range(n_moves):
+        new_paths = []
+        for p in paths:
+            x = p.count('x')
+            if x < width:
+                new_paths.append(p + 'x')
+            # skip y on first iteration
+            if i > 0:
+                y = p.count('y')
+                if y < height:
+                    new_paths.append(p + 'y')
+        paths = new_paths
+    return paths
+
 def solve(width, height):
-    paths = findPaths(width, height)
-    n_paths = len(paths)
+    if width == height:
+        # only find half of paths, then double to get result
+        # use symmetry (n x n grid)
+        paths = findHalfPaths(width, height)
+        n_paths = 2 * len(paths)
+    
+    else:
+        paths = findPaths(width, height)
+        n_paths = len(paths)
+    
     #print(paths)
     return n_paths
 
 def main():
     start_time = time.time()
-    x = solve(10, 10)
+    x = solve(13, 13)
     end_time = time.time()
     
     run_time = end_time - start_time 

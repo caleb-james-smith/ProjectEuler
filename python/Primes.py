@@ -32,9 +32,9 @@ class Primes:
     
     def isPrime(self, number, values=[]):
         # note: 1 is not prime
-        # speed up by checking some divisors
         if number == 1:
             return False
+        # speed up by checking some divisors from list of primes
         if values:
             if number in values:
                 return True
@@ -45,7 +45,8 @@ class Primes:
         # check for divisors up to square root
         return not self.divsToSqrt(number)
 
-    def calcPrimes(self, max_val):
+    # Basic algorithm: find primes in two sets, and use first set to speed up second set
+    def calcPrimesBasic(self, max_val):
         if max_val > 1000:
             # speed up by using first set of primes
             first_max = 1000
@@ -55,6 +56,30 @@ class Primes:
         else:
             primes = [x for x in range(1, max_val) if self.isPrime(x)]
         self.setPrimes(primes)
+
+    # Sieve of Eratosthenes
+    def calcPrimesAdvanced(self, max_val):
+        if max_val < 1:
+            print("ERROR: max_val needs to be a positive integer")
+            return
+        elif max_val == 1:
+            self.setPrimes([])
+            return
+        # start with all numbers assigned True for prime
+        # assign False to numbers that are divisible 
+        # at the end, numbers still assigned True are prime
+        is_prime_list = max_val * [True]
+        is_prime_list[0] = False 
+        is_prime_list[1] = False 
+        # check up to square root of number
+        for i in range(2, int(np.sqrt(max_val)) + 1):
+            if is_prime_list[i]:
+                # start from i^2 to save time
+                for j in range(i**2, max_val, i):
+                    is_prime_list[j] = False
+        primes = [i for i in range(len(is_prime_list)) if is_prime_list[i]] 
+        self.setPrimes(primes)
+        return
 
     def setPrimes(self, primes):
         self.primes = primes

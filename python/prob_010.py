@@ -12,7 +12,7 @@ import time
 
 def solve(max_val):
     P = Primes()
-    P.calcPrimes(max_val)
+    P.calcPrimesAdvanced(max_val)
     primes = P.getPrimes()
     result = sum(primes)
     return result

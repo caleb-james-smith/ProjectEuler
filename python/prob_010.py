@@ -8,7 +8,7 @@
 #
 
 from Primes import Primes
-import time
+from Solver import Solver
 
 def solve(max_val):
     P = Primes()
@@ -18,14 +18,8 @@ def solve(max_val):
     return result
 
 def main():
-    start_time = time.time()
-    x = solve(2 * 10**6)
-    end_time = time.time()
-    
-    run_time = end_time - start_time 
-    
-    print("answer: {0}".format(x))
-    print("run time: {0:.3f} seconds".format(run_time))
+    solver = Solver(solve, 2 * 10**6)
+    solver.solve()
 
 main()
 

@@ -7,8 +7,7 @@
 # How many such routes are there through a 20×20 grid?
 #
 
-import time
-import numpy as np
+from Solver import Solver
 
 def findPaths(width, height):
     n_moves = width + height
@@ -44,7 +43,9 @@ def findHalfPaths(width, height):
         paths = new_paths
     return paths
 
-def solve(width, height):
+def solve(dimensions):
+    width  = dimensions[0]
+    height = dimensions[1]
     if width == height:
         # only find half of paths, then double to get result
         # use symmetry (n x n grid)
@@ -59,14 +60,8 @@ def solve(width, height):
     return n_paths
 
 def main():
-    start_time = time.time()
-    x = solve(13, 13)
-    end_time = time.time()
-    
-    run_time = end_time - start_time 
-    
-    print("answer: {0}".format(x))
-    print("run time: {0:.3f} seconds".format(run_time))
+    solver = Solver(solve, [12, 12])
+    solver.solve()
 
 main()
 

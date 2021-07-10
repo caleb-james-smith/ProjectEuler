@@ -8,7 +8,7 @@
 # Find the largest palindrome made from the product of two 3-digit numbers.
 #
 
-import time
+from Solver import Solver
 
 # check if number reads the same both ways
 def palindrome(number):
@@ -27,14 +27,8 @@ def solve(num_digits):
     return current_max
 
 def main():
-    start_time = time.time()
-    x = solve(3)
-    end_time = time.time()
-    
-    run_time = end_time - start_time 
-    
-    print("answer: {0}".format(x))
-    print("run time: {0:.3f} seconds".format(run_time))
+    solver = Solver(solve, 3)
+    solver.solve()
 
 main()
 

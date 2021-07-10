@@ -21,7 +21,7 @@ def solve(number, primes):
     return primeFactors
 
 P = Primes()
-P.calcPrimes(10**4)
+P.calcPrimesAdvanced(10**4)
 primes = P.getPrimes()
 print("number of primes: {0}".format(len(primes)))
 

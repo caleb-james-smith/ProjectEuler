@@ -33,13 +33,13 @@ x = solve(600851475143, primes)
 print("prime factors: {0}".format(x))
 print("largest prime factor: {0}".format(max(x)))
 
-numbers = [
-    101,
-    10101,
-    1010101,
-    101010101,
-    10101010101,
-]
-for n in numbers:
-    print("{0}: {1}".format(n, solve(n, primes)))
+#numbers = [
+#    101,
+#    10101,
+#    1010101,
+#    101010101,
+#    10101010101,
+#]
+#for n in numbers:
+#    print("{0}: {1}".format(n, solve(n, primes)))
 

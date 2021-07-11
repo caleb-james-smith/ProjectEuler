@@ -30,7 +30,7 @@
 #
 
 from Primes import Primes
-import time
+from Solver import Solver
 
 def solve(n_divisors_limit):
     P = Primes()
@@ -56,14 +56,8 @@ def solve(n_divisors_limit):
     return t
 
 def main():
-    start_time = time.time()
-    x = solve(500)
-    end_time = time.time()
-    
-    run_time = end_time - start_time 
-    
-    print("answer: {0}".format(x))
-    print("run time: {0:.3f} seconds".format(run_time))
+    solver = Solver(solve, 500)
+    solver.solve()
 
 main()
 

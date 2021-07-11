@@ -53,7 +53,7 @@ def solve(n_consecutive, n_distinct, primes):
     return matches
 
 P = Primes()
-P.calcPrimes(10**4)
+P.calcPrimesAdvanced(10**4)
 primes = P.getPrimes()
 
 for i in range(1, 5):

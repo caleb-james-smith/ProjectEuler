@@ -14,8 +14,8 @@ def solve(max_val):
     s = 0
     x1 = 1
     x2 = 2
-    s += x2
     x3 = x1 + x2
+    s += x2
     while x3 <= max_val:
         if x3 % 2 == 0:
             s += x3

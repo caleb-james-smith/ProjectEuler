@@ -79,7 +79,6 @@ class Primes:
                     is_prime_list[j] = False
         primes = [i for i in range(len(is_prime_list)) if is_prime_list[i]] 
         self.setPrimes(primes)
-        return
 
     def setPrimes(self, primes):
         self.primes = primes

@@ -10,30 +10,57 @@
 #include <iostream>
 #include "../include/Primes.h"
 
-int solve(int max_val) 
+// get prime factors of a number
+// use list of primes to improve speed
+std::vector<int> primeFactors(long long int number, std::vector<int> primes)
 {
-    // input array 
-    int input[] = {2, 3, 5};
-    std::vector<int> vec(std::begin(input), std::end(input));
-    for (const auto num : vec)
+    std::vector<int> prime_factors;
+    int i = 0;
+    while (i < primes.size() and primes[i] <= number)
     {
-        std::cout << num << std::endl;
+        if (number % primes[i] == 0)
+        {
+            prime_factors.push_back(primes[i]);
+        }
+        i += 1;
     }
+    return prime_factors;
+}
+
+int solve(long long int number) 
+{
+    int max_val = 10000;
     Primes P = Primes();
-    P.setPrimes(vec);
+    P.calcPrimesBasic(max_val);
     std::vector<int> primes = P.getPrimes();
-    for (const auto num : primes)
-    {
-        std::cout << num << std::endl;
-    }
+    //std::cout << "-----" << std::endl;
+    //for (const auto num : primes)
+    //{
+    //    std::cout << num << std::endl;
+    //}
+    //std::cout << "-----" << std::endl;
+    std::cout << "Number of primes less than " << max_val << ": " << primes.size() << std::endl;
     int s = 0;
+    std::vector<int> prime_factors = primeFactors(number, primes);
+    std::cout << "factors: ";
+    for (const auto num : prime_factors)
+    {
+        std::cout << num << ", ";
+    }
+    std::cout << std::endl;
+    s = prime_factors.back();
     return s;
 }
 
 int main()
 {
-    int x = solve(99);
-    std::cout << x << std::endl;
+    //WARNING: Use type "long long int" throughout for large number
+    //         to fix "Segmentation fault: 11" that occurs for large values
+    long long int x;
+    x = solve(13195);
+    std::cout << "answer: " << x << std::endl;
+    x = solve(600851475143);
+    std::cout << "answer: " << x << std::endl;
     return 0;
 }
 

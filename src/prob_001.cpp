@@ -13,7 +13,7 @@
 int solve(int max_val) 
 {
     int s = 0;
-    for (int i = 0; i < max_val; i++)
+    for (int i = 0; i < max_val; ++i)
     {
         if (i % 3 == 0 or i % 5 == 0)
         {

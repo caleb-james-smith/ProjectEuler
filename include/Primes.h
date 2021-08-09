@@ -2,6 +2,7 @@
 #define PRIMES_H
 
 #include <vector>
+#include <math.h>
 
 class Primes
 {
@@ -11,6 +12,9 @@ public:
     Primes();
     void setPrimes(std::vector<int> primes);
     std::vector<int> getPrimes();
+    bool divsToSqrt(int number);
+    bool isPrime(int number);
+    void calcPrimesBasic(int max_val);
 };
 
 #endif

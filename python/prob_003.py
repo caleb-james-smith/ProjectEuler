@@ -20,10 +20,11 @@ def solve(number, primes):
         i += 1
     return primeFactors
 
+max_val = 10**4
 P = Primes()
-P.calcPrimesAdvanced(10**4)
+P.calcPrimesAdvanced(max_val)
 primes = P.getPrimes()
-print("number of primes: {0}".format(len(primes)))
+print("number of primes less than {0}: {1}".format(max_val, len(primes)))
 
 x = solve(13195, primes)
 print("prime factors: {0}".format(x))

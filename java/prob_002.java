@@ -10,7 +10,7 @@
 // find the sum of the even-valued terms.
 // 
 
-public class Main
+public class prob_002
 {
     static int solve(int max_val)
     {

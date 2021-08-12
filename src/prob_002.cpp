@@ -14,7 +14,7 @@
 
 int solve(int max_val) 
 {
-    int s = 0;
+    int s  = 0;
     int x1 = 1;
     int x2 = 2;
     int x3 = x1 + x2;

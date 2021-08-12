@@ -20,15 +20,16 @@ def solve(number, primes):
         i += 1
     return primeFactors
 
-max_val = 10**4
+max_val = 10**7
 P = Primes()
+#P.calcPrimesBasic(max_val)
 P.calcPrimesAdvanced(max_val)
 primes = P.getPrimes()
 print("number of primes less than {0}: {1}".format(max_val, len(primes)))
 
-x = solve(13195, primes)
-print("prime factors: {0}".format(x))
-print("largest prime factor: {0}".format(max(x)))
+#x = solve(13195, primes)
+#print("prime factors: {0}".format(x))
+#print("largest prime factor: {0}".format(max(x)))
 
 x = solve(600851475143, primes)
 print("prime factors: {0}".format(x))

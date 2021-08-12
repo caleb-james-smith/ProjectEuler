@@ -15,6 +15,7 @@ public:
     bool divsToSqrt(int number);
     bool isPrime(int number);
     void calcPrimesBasic(int max_val);
+    void calcPrimesAdvanced(int max_val);
 };
 
 #endif

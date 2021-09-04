@@ -90,25 +90,31 @@ void example()
     std::cout << "n3 = " << n3.getValue() << std::endl;
 }
 
-int solve(int max_val, int target_digits) 
+
+int solveSmallNumbers(int max_val, int target_digits) 
 {
-    // example for using Number class
-    //example();
-    
     // works for small numbers
     // limited by storage size of "unsigned long long int"
-    //std::vector<unsigned long long int> values = calcFibonacciInts(max_val);
-    //for (int i = 0; i < values.size(); ++i)
-    //{
-    //    std::string val_str = std::to_string(values[i]);
-    //    int num_digits = val_str.size();
-    //    printf("%d: %llu ---> %d digits\n", i, values[i], num_digits);
-    //    if (num_digits == target_digits)
-    //    {
-    //        return i + 1; 
-    //    }
-    //}
-    
+    std::vector<unsigned long long int> values = calcFibonacciInts(max_val);
+    for (int i = 0; i < values.size(); ++i)
+    {
+        std::string val_str = std::to_string(values[i]);
+        int num_digits = val_str.size();
+        //printf("%d: %llu ---> %d digits\n", i, values[i], num_digits);
+        if (num_digits == target_digits)
+        {
+            printf("%llu\n", values[i]);
+            printf("number of digits: %d\n", num_digits);
+            return i + 1; 
+        }
+    }
+
+    printf("ERROR: no answer found for max_val = %d and target_digits = %d\n", max_val, target_digits);
+    return -1;
+}
+
+int solveLargeNumbers(int max_val, int target_digits) 
+{
     // works for large numbers
     std::vector<Number> values = calcFibonacciNumbers(max_val);
     for (int i = 0; i < values.size(); ++i)
@@ -123,7 +129,22 @@ int solve(int max_val, int target_digits)
         }
     }
     
+    printf("ERROR: no answer found for max_val = %d and target_digits = %d\n", max_val, target_digits);
     return -1;
+}
+
+int solve(int max_val, int target_digits) 
+{
+    // example for using Number class
+    //example();
+    
+    // for small numbers
+    //int answer = solveSmallNumbers(max_val, target_digits);    
+
+    // for large numbers
+    int answer = solveLargeNumbers(max_val, target_digits);    
+    
+    return answer;
 }
 
 int main()

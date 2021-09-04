@@ -10,14 +10,14 @@
 from Solver import Solver
 
 def solve(max_val):
-    search = True
-    i = 1
-    values = range(1, max_val + 1)
     answer = -1
+    i = 1
+    search = True
+    values = range(1, max_val + 1)
     while search:
         divisible = True
         for v in values:
-            if not i % v == 0:
+            if i % v != 0:
                 divisible = False
                 break
         if divisible:
@@ -27,6 +27,7 @@ def solve(max_val):
     return answer
 
 def main():
+    #solver = Solver(solve, 10)
     solver = Solver(solve, 20)
     solver.solve()
 

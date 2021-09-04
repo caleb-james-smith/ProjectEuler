@@ -28,10 +28,12 @@ public class prob_003
     }
     static int solve(long number)
     {
-        int max_val = 10000;
+        //int max_val = 10000;
+        int max_val = 10000000;
         int s = 0;
         Primes P = new Primes();
-        P.calcPrimesBasic(max_val);
+        //P.calcPrimesBasic(max_val);
+        P.calcPrimesAdvanced(max_val);
         int[] primes = P.getPrimes();
         int[] prime_factors = primeFactors(number, primes);
         //System.out.println(Arrays.toString(primes));
@@ -44,8 +46,9 @@ public class prob_003
     {
         // WARNING: Use type "long" and append L to large number: 600851475143L
         //          to avoid "error: integer number too large" error.
-        int x = solve(13195);
-        System.out.println("answer: " + x);
+        long x;
+        //x = solve(13195);
+        //System.out.println("answer: " + x);
         x = solve(600851475143L);
         System.out.println("answer: " + x);
     }

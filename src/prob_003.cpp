@@ -29,10 +29,12 @@ std::vector<int> primeFactors(long long int number, std::vector<int> primes)
 
 int solve(long long int number) 
 {
-    int max_val = 10000;
+    //int max_val = 10000;
+    int max_val = 10000000;
     int s = 0;
     Primes P = Primes();
-    P.calcPrimesBasic(max_val);
+    //P.calcPrimesBasic(max_val);
+    P.calcPrimesAdvanced(max_val);
     std::vector<int> primes = P.getPrimes();
     //std::cout << "-----" << std::endl;
     //for (const auto num : primes)
@@ -57,8 +59,8 @@ int main()
     // WARNING: Use type "long long int" throughout for large number
     //          to fix "Segmentation fault: 11" that occurs for large values.
     long long int x;
-    x = solve(13195);
-    std::cout << "answer: " << x << std::endl;
+    //x = solve(13195);
+    //std::cout << "answer: " << x << std::endl;
     x = solve(600851475143);
     std::cout << "answer: " << x << std::endl;
     return 0;

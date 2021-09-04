@@ -9,6 +9,11 @@ std::string Number::getValue()
     return m_value;
 }
 
+int Number::getLength()
+{
+    return m_value.size();
+}
+
 void Number::setValue(std::string value)
 {
     m_value = value;
@@ -26,13 +31,13 @@ Number Number::add(Number number)
 
     if (value1.length() >= value2.length())
     {
-        printf("Use value 1 (%s) as primary\n", value1.c_str());
+        //printf("Use value 1 (%s) as primary\n", value1.c_str());
         primary   = value1;
         secondary = value2;
     }
     else
     {
-        printf("Use value 2 (%s) as primary\n", value2.c_str());
+        //printf("Use value 2 (%s) as primary\n", value2.c_str());
         primary   = value2;
         secondary = value1;
     }
@@ -67,13 +72,12 @@ Number Number::add(Number number)
     }
     if (q > 0)
     {
-        printf("q = %d\n", q);
+        //printf("q = %d\n", q);
         answer.append(std::to_string(q));
     }
     // reverse string
     reverse(answer.begin(), answer.end());
-    printf("answer: %s\n", answer.c_str());
-    
+    //printf("answer: %s\n", answer.c_str());
     
     number.setValue(answer);
     return number;

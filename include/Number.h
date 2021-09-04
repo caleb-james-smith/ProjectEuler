@@ -11,6 +11,7 @@ private:
 public:
     Number();
     std::string getValue();
+    int getLength();
     void setValue(std::string value);
     Number add(Number number);
 };

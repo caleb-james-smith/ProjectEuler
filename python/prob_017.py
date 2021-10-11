@@ -48,11 +48,41 @@ num_to_word_3 = {
     90 : "ninety",
 }
 
+def getTwoDigitWord(number):
+    if number < 20:
+        return num_to_word_2[number]
+    a = (number // 10) * 10
+    b = number % 10
+    a_w = num_to_word_3[a]
+    if b:
+        b_w = num_to_word_1[b]
+        return a_w + "-" + b_w
+    else:
+        return a_w
+
+def getThreeDigitWord(number):
+    a = (number // 100)
+    b = number % 100
+    a_w = num_to_word_1[a]
+    c = a_w + " hundred"
+    if b == 0:
+        return c
+    elif b < 10:
+        b_w = num_to_word_1[b]
+        return c + " and " + b_w
+    else:
+        b_w = getTwoDigitWord(b)
+        return c + " and " + b_w
+
 def getWord(number):
     if number < 10:
         return num_to_word_1[number]
-    elif number < 20:
-        return num_to_word_2[number]
+    elif number < 100:
+        return getTwoDigitWord(number)
+    elif number < 1000:
+        return getThreeDigitWord(number)
+    elif number == 1000:
+        return "one thousand"
     else:
         return ""
 
@@ -74,7 +104,7 @@ def solve(max_val):
     return result
 
 def main():
-    solver = Solver(solve, 5)
+    solver = Solver(solve, 1000)
     solver.solve()
 
 main()

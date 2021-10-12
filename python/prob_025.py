@@ -44,12 +44,14 @@ def calcFibonacci(max_val):
 
 def solve(parameters):
     max_val = parameters[0]
-    digits  = parameters[1]
+    target_digits  = parameters[1]
     values = calcFibonacci(max_val)
     for i in range(len(values)):
         s = str(values[i])
         num_digits = len(s)
-        if num_digits == digits:
+        if num_digits == target_digits:
+            print(values[i])
+            print("number of digits: {0}".format(num_digits))
             return i + 1
     return -1
 

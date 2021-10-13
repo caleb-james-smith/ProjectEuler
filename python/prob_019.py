@@ -39,6 +39,8 @@ month_to_days = {
     12 : 31,
 }
 
+MONTHS_PER_YEAR = 12
+
 def isLeapYear(year):
     # Leap year definition
     if year % 400 == 0:
@@ -69,23 +71,100 @@ def getDaysPerYear(year):
         days += 1
     return days
 
-def count(start, end):
+# count days from date to end of month (inclusive)
+def getDaysToEndOfMonth(year, month, day):
+    x = getDaysPerMonth(year, month)
+    days = x - day + 1
+    return days
+
+# count days from beginning of month to date  (inclusive)
+def getDaysSinceStartOfMonth(year, month, day):
+    return day
+
+# count days from date to end of year (inclusive)
+def getDaysToEndOfYear(year, month, day):
+    days = 0
+    days += getDaysToEndOfMonth(year, month, day)
+    for m in range(month + 1, MONTHS_PER_YEAR + 1):
+        days += getDaysPerMonth(year, m)
+    return days
+
+# count days from beginning of year to date (inclusive)
+def getDaysSinceStartOfYear(year, month, day):
+    days = 0
+    for m in range(1, month):
+        days += getDaysPerMonth(year, m)
+    days += getDaysSinceStartOfMonth(year, month, day)
+    return days
+
+# count total days between two dates (inclusive)
+def countTotalDays(start, end):
     result = 0
-    for year in range(start["year"], end["year"] + 1):
-        result += getDaysPerYear(year)
-        # for testing
-        #result += getDaysPerYearUsingSum(year)
-        #print("Year {0}: {1} days".format(year, getDaysPerYear(year)))
+    start_year  = start["year"]
+    start_month = start["month"]
+    start_day   = start["day"]
+    end_year    = end["year"]
+    end_month   = end["month"]
+    end_day     = end["day"]
+    # require end date to be on or later than start date
+    if start_year > end_year:
+        print("ERROR: start_year = {0}, end_year = {1}".format(start_year, end_year))
+        return result
+    elif start_year == end_year:
+        if start_month > end_month:
+            print("ERROR: start_month = {0}, end_month = {1}".format(start_month, end_month))
+            return result
+        elif start_month == end_month:
+            if start_day > end_day:
+                print("ERROR: start_day = {0}, end_day = {1}".format(start_day, end_day))
+                return result
+            else:
+                # middle days
+                x = end_day - start_day + 1
+                result += x
+        else:
+            result += getDaysToEndOfMonth(start_year, start_month, start_day)
+            result += getDaysSinceStartOfMonth(end_year, end_month, end_day)
+            # middle months if any
+            for month in range(start_month + 1, end_month):
+                result += getDaysPerMonth(start_year, month)
+    else:
+        result += getDaysToEndOfYear(start_year, start_month, start_day) 
+        result += getDaysSinceStartOfYear(end_year, end_month, end_day) 
+        # middle years if any
+        for year in range(start_year + 1, end_year):
+            result += getDaysPerYear(year)
+            # for testing
+            #result += getDaysPerYearUsingSum(year)
+            #print("Year {0}: {1} days".format(year, getDaysPerYear(year)))
     return result
 
-def solveTotalDays(value):
+# count total Sundays between two dates (inclusive)
+def countTotalSundays(start, end):
+    total_days = countTotalDays(start, end)
+    # Decrease total by current week (including Sunday)
+    sunday = 7
+    diff = abs(sunday - start["day"])
+    days = total_days - diff - 1
+    result = (days // 7) + 1
+    return result
+
+# count Sundays that are on the first of the month
+def countFirstSundays(start, end):
+    result = 0
+    return result
+
+def solve(value):
     start = {"year" : 1901, "month" : 1,  "day" : 1 }
     end   = {"year" : 2000, "month" : 12, "day" : 31}
-    result = count(start, end)
+    #start = {"year" : 1999, "month" : 10, "day" : 10 }
+    #end   = {"year" : 1999, "month" : 10, "day" : 20 }
+    #result = countTotalDays(start, end)
+    result = countTotalSundays(start, end)
     return result
 
 def main():
-    solver = Solver(solveTotalDays, 0)
+    solver = Solver(solve, 0)
     solver.solve()
 
 main()

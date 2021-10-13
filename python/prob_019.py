@@ -39,6 +39,7 @@ month_to_days = {
     12 : 31,
 }
 
+DAYS_PER_WEEK   = 7
 MONTHS_PER_YEAR = 12
 
 def isLeapYear(year):
@@ -51,6 +52,13 @@ def isLeapYear(year):
         return True
     else:
         return False
+
+# get weekday (1-7) after number of days
+def getNextWeekday(weekday, days):
+    result = (weekday + days) % DAYS_PER_WEEK
+    if result == 0:
+        result = 7
+    return result
 
 def getDaysPerMonth(year, month):
     days = month_to_days[month] 
@@ -141,26 +149,61 @@ def countTotalDays(start, end):
 
 # count total Sundays between two dates (inclusive)
 def countTotalSundays(start, end):
+    start_weekday = start["weekday"]
     total_days = countTotalDays(start, end)
     # Decrease total by current week (including Sunday)
     sunday = 7
-    diff = abs(sunday - start["day"])
+    diff = abs(sunday - start_weekday)
     days = total_days - diff - 1
-    result = (days // 7) + 1
+    result = (days // DAYS_PER_WEEK) + 1
     return result
 
 # count Sundays that are on the first of the month
+# assume full years are used with all months and days
 def countFirstSundays(start, end):
     result = 0
+    weekday = 0
+    
+    start_year      = start["year"]
+    start_month     = start["month"]
+    start_day       = start["day"]
+    start_weekday   = start["weekday"]
+    end_year        = end["year"]
+    end_month       = end["month"]
+    end_day         = end["day"]
+    end_weekday     = end["weekday"]
+    
+    weekday = start_weekday
+    if weekday == 7:
+        result += 1
+    
+    for year in range(start_year, end_year + 1):
+        for month in range(1, MONTHS_PER_YEAR + 1):
+            x = getDaysPerMonth(year, month)
+            # don't use final month, as there are no more months
+            if year == end_year and month == MONTHS_PER_YEAR:
+                # check final weekday
+                weekday = getNextWeekday(weekday, x - 1)
+                if weekday == end_weekday:
+                    print("PASS: final weekday is {0}; expected {1}".format(weekday, end_weekday))
+                else:
+                    print("FAIL: final weekday is {0}; expected {1}".format(weekday, end_weekday))
+            else:
+                weekday = getNextWeekday(weekday, x)
+                # count Sundays
+                if weekday == 7:
+                    result += 1
     return result
 
 def solve(value):
-    start = {"year" : 1901, "month" : 1,  "day" : 1 }
-    end   = {"year" : 2000, "month" : 12, "day" : 31}
+    # Weekdays: Monday (1) to Sunday (7)
+    start = {"year" : 1901, "month" : 1,  "day" : 1,  "weekday" : 2}
+    end   = {"year" : 2000, "month" : 12, "day" : 31, "weekday" : 7}
     #start = {"year" : 1999, "month" : 10, "day" : 10 }
     #end   = {"year" : 1999, "month" : 10, "day" : 20 }
     #result = countTotalDays(start, end)
-    result = countTotalSundays(start, end)
+    #result = countTotalSundays(start, end)
+    result = countFirstSundays(start, end)
     return result
 
 def main():

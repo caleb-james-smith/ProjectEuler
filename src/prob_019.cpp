@@ -1,4 +1,4 @@
-// prob_019.py
+// prob_019.cpp
 // 
 // Problem 19
 // 
@@ -85,15 +85,15 @@ int getNextWeekday(int weekday, int days)
 
 int test()
 {
-    //for(int i = 1; i < 2021; ++i)
-    //{
-    //    printf("year: %d", i);
-    //    if (isLeapYear(i))
-    //    {
-    //        printf(" --- leap year");
-    //    }
-    //    printf("\n");
-    //}
+    for(int i = 1; i < 2021; ++i)
+    {
+        printf("year: %d", i);
+        if (isLeapYear(i))
+        {
+            printf(" --- leap year");
+        }
+        printf("\n");
+    }
     for (int i = 1; i < 13; ++i)
     {
         int year = 1900;
@@ -117,6 +117,42 @@ int countFirstSundays(std::map<std::string, int> start, std::map<std::string, in
     int end_month       = end["month"];
     int end_day         = end["day"];
     int end_weekday     = end["weekday"];
+    weekday = start_weekday;
+    // count Sundays
+    if (weekday == 7)
+    {
+        result += 1;
+    }
+    for (int year = start_year; year <= end_year; ++year)
+    {
+        for (int month = 1; month <= 12; ++month)
+        {
+            int x = getDaysPerMonth(year, month); 
+            if (year == end_year and month == end_month)
+            {
+                // check final weekday
+                weekday = getNextWeekday(weekday, x - 1);
+                if (weekday == end_weekday)
+                {
+                    printf("PASS: ");
+                }
+                else
+                {
+                    printf("FAIL: ");
+                }
+                printf("final weekday is %d; expected %d\n", weekday, end_weekday);
+            }
+            else
+            {
+                weekday = getNextWeekday(weekday, x);
+                // count Sundays
+                if (weekday == 7)
+                {
+                    result += 1;
+                }
+            }
+        }
+    }
     return result; 
 }
 
@@ -133,8 +169,8 @@ int solve()
     end["month"]        = 12;
     end["day"]          = 31;
     end["weekday"]      = 7;
-    countFirstSundays(start, end);
-    return 0;
+    int result = countFirstSundays(start, end);
+    return result;
 }
 
 int main()

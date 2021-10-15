@@ -176,6 +176,7 @@ def countFirstSundays(start, end):
     end_weekday     = end["weekday"]
     
     weekday = start_weekday
+    # count Sundays
     if weekday == 7:
         result += 1
     

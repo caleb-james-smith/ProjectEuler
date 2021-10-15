@@ -23,6 +23,7 @@
 // 
 
 #include <iostream>
+#include <string>
 #include <map>
 
 // is a given year a leap year?
@@ -71,6 +72,17 @@ int getDaysPerMonth(int year, int month)
     return days;
 }
 
+// get weekday (1-7) after number of days
+int getNextWeekday(int weekday, int days)
+{
+    int result = (weekday + days) % 7;
+    if (result == 0)
+    {
+        result = 7;
+    }
+    return result;
+}
+
 int test()
 {
     //for(int i = 1; i < 2021; ++i)
@@ -90,9 +102,38 @@ int test()
     }
     return 0;
 }
+
+// count Sundays that are on the first of the month
+// assume full years are used with all months and days
+int countFirstSundays(std::map<std::string, int> start, std::map<std::string, int> end)
+{
+    int result  = 0;
+    int weekday = 0;
+    int start_year      = start["year"];
+    int start_month     = start["month"];
+    int start_day       = start["day"];
+    int start_weekday   = start["weekday"];
+    int end_year        = end["year"];
+    int end_month       = end["month"];
+    int end_day         = end["day"];
+    int end_weekday     = end["weekday"];
+    return result; 
+}
+
 int solve()
 {
-    test();
+    // Weekdays: Monday (1) to Sunday (7)
+    std::map<std::string, int> start;
+    std::map<std::string, int> end;
+    start["year"]       = 1901;
+    start["month"]      = 1;
+    start["day"]        = 1;
+    start["weekday"]    = 2;
+    end["year"]         = 2000;
+    end["month"]        = 12;
+    end["day"]          = 31;
+    end["weekday"]      = 7;
+    countFirstSundays(start, end);
     return 0;
 }
 

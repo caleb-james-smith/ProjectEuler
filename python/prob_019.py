@@ -163,7 +163,7 @@ def countTotalSundays(start, end):
 # count Sundays that are on the first of the month
 # assume full years are used with all months and days
 def countFirstSundays(start, end):
-    result = 0
+    result  = 0
     weekday = 0
     
     start_year      = start["year"]
@@ -198,6 +198,7 @@ def countFirstSundays(start, end):
     return result
 
 def solve(value):
+    # How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
     # Weekdays: Monday (1) to Sunday (7)
     start = {"year" : 1901, "month" : 1,  "day" : 1,  "weekday" : 2}
     end   = {"year" : 2000, "month" : 12, "day" : 31, "weekday" : 7}

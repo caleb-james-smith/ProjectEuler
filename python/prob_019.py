@@ -42,6 +42,7 @@ month_to_days = {
 DAYS_PER_WEEK   = 7
 MONTHS_PER_YEAR = 12
 
+# is a given year a leap year?
 def isLeapYear(year):
     # Leap year definition
     if year % 400 == 0:
@@ -60,6 +61,7 @@ def getNextWeekday(weekday, days):
         result = 7
     return result
 
+# get number of days for given month; account for leap year
 def getDaysPerMonth(year, month):
     days = month_to_days[month] 
     # February during leap year

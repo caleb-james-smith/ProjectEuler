@@ -86,6 +86,7 @@ void Number::setValue(std::string value)
     m_value = value;
 }
 
+// Add two Numbers
 Number Number::add(Number number)
 {
 
@@ -97,5 +98,17 @@ Number Number::add(Number number)
     result.setValue(answer);
     
     return result;
+}
+
+// Multiply Number by int
+Number Number::scale(int a)
+{
+    Number answer = Number();
+    answer.setValue("0");
+    for (int i = 0; i < a; ++i)
+    {
+        answer = answer.add(*this);
+    }
+    return answer;
 }
 

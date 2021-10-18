@@ -20,6 +20,7 @@ def factorial(n):
 
 def solve(max_val):
     x = factorial(max_val)
+    print(x)
     s = str(x)
     values = [int(y) for y in s]
     return sum(values)

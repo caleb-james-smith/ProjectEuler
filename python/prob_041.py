@@ -10,13 +10,7 @@
 
 from Primes import Primes
 from Solver import Solver
-
-def pandigital(number):
-    s = str(number)
-    for i in range(1, len(s) + 1):
-        if str(i) not in s:
-            return False
-    return True
+from tools import pandigital
 
 def solve(max_val):
     P = Primes()

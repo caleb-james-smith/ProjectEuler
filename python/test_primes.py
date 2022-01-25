@@ -3,6 +3,9 @@
 from Primes import Primes
 import time
 
+def getNumDigits(n):
+    return len(str(n))
+
 def test1():
     P = Primes()
     limits = [10 ** i for i in range(6)]
@@ -60,17 +63,27 @@ def test3(lim):
     P = Primes()
     
     t0 = time.time()
-    
     P.calcPrimesAdvanced(lim)
     primes = P.getPrimes()
-    print("limit: {0:.1e}, number of primes: {1}".format(lim, len(primes)))
-    
     t1 = time.time()
-    
     run_time1 = t1 - t0
+    
+    n_five_digit = 0
+    n_six_digit  = 0
+    for p in primes:
+        #print(p)
+        if getNumDigits(p) == 5:
+            n_five_digit += 1
+        if getNumDigits(p) == 6:
+            n_six_digit += 1
+    
     print("run time: {0:.3f} seconds".format(run_time1))
+    print("limit: {0:.1e}, number of primes: {1}".format(lim, len(primes)))
+    print("number of five digit primes: {0}".format(n_five_digit))
+    print("number of six digit primes: {0}".format(n_six_digit))
+
 
 #test1()
 #test2(2 * 10**5)
-test3(10**7)
+test3(10**6)
 

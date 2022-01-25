@@ -14,6 +14,7 @@ public:
     int getLength();
     void setValue(std::string value);
     Number add(Number number);
+    Number scale(int a);
 };
 
 #endif

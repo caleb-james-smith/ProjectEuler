@@ -12,12 +12,14 @@ python3 python/prob_003.py
 Example of running C++ code.
 Here we put the executable in the directory "bin".
 ```
+mkdir -p bin
 g++ --std=c++20 -o bin/prob_003 src/prob_003.cpp src/Primes.cpp
 ./bin/prob_003
 ```
 
 For GCC version 9 and earlier:
 ```
+mkdir -p bin
 g++ --std=c++2a -o bin/prob_003 src/prob_003.cpp src/Primes.cpp
 ./bin/prob_003
 ```

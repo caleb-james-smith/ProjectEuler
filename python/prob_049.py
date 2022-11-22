@@ -62,7 +62,21 @@ def hasSameDigits(n1, n2):
 
     return True
 
+# check if list is arithmetic sequence
+def isArithSeq(vals):
+    n_vals = len(vals)
+    if n_vals < 2:
+        return False
+    else:
+        first_diff = vals[1] - vals[0]
+        for i in range(1, n_vals - 1):
+            diff = vals[i + 1] - vals[i]
+            if diff != first_diff:
+                return False
+        return True
+
 def solve(ndigits):
+    answer = ""
     print("Solving for ndigits = {0}".format(ndigits))
     max_val = 10 ** ndigits
     P = Primes()
@@ -82,9 +96,22 @@ def solve(ndigits):
             p2 = selected_primes[j]
             if hasSameDigits(p1, p2):
                 matches.append(p2)
+        
         n_matches = len(matches)
-        print("p1 = {0}, n_matches = {1}".format(p1, n_matches))
-        print(matches)
+        
+        #print("p1 = {0}, n_matches = {1}".format(p1, n_matches))
+        #print(matches)
+
+        # TODO: does not find the example answer yet
+        #       need to check cases with matches > 3
+
+        if n_matches == 3:
+            if isArithSeq(matches):
+                print("p1 = {0}, n_matches = {1}".format(p1, n_matches))
+                print(matches)
+                strings = [str(x) for x in matches]
+                answer = "".join(strings)
+    return answer
 
 def main():
     solver = Solver(solve, 4)

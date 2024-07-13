@@ -9,6 +9,14 @@ Example of running python code:
 python3 python/prob_003.py
 ```
 
+Example of running Rust code.
+Here, we are using the compiler flags `-O -C opt-level=3` for maximum optimization.
+```
+cd rust
+rustc -O -C opt-level=3 prob_044.rs
+./prob_044
+```
+
 Example of running C++ code.
 Here we put the executable in the directory "bin".
 ```

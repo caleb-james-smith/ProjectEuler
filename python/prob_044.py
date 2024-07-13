@@ -13,6 +13,7 @@
 
 from Solver import Solver
 
+# Calculate pentagonal number P(n)
 def P(n):
     result = n * (3 * n - 1) / 2 
     result = int(result)
@@ -20,9 +21,8 @@ def P(n):
 
 def solve(num):
     print("Go go go!")
-    max_n = int(3e3)
     result = 1e9
-
+    max_n = int(3e3)
     print("max_n: {0}".format(max_n))
     
     # get pentagonal numbers
@@ -33,6 +33,8 @@ def solve(num):
     #    n = i + 1
     #    print("{0}: {1}".format(n, p))
 
+    # search for pairs of pentagonal numbers that meet the requirements   
+    # record the minimal difference 
     for i in range(max_n):
         for j in range(i + 1, max_n):
             p_sum  = pentagonal_nums[i] + pentagonal_nums[j]

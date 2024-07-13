@@ -22,8 +22,11 @@ fn P(n: i32) -> i32 {
 // Solve the problem
 fn solve() -> i32 {
     println!("Go go go!");
-    let max_n: i32  = 10;
-    let result: i32 = 0;
+    
+    // Since we plan to change result, we need to make it mutable using "mut"
+    let mut result: i32 = 1_000_000_000;
+    
+    let max_n: i32  = 3_000;
     
     println!("max_n: {max_n}");
     
@@ -35,10 +38,10 @@ fn solve() -> i32 {
     }
     
     // print pentagonal numbers
-    for (i, p) in pentagonal_nums.iter().enumerate() {
-        let n = i + 1;
-        println!("P({n}) = {p}");
-    }
+    //for (i, p) in pentagonal_nums.iter().enumerate() {
+    //    let n = i + 1;
+    //    println!("P({n}) = {p}");
+    //}
 
     // search for pairs of pentagonal numbers that meet the requirements
     // record the minimal difference
@@ -46,7 +49,14 @@ fn solve() -> i32 {
         for j in (i+1)..max_n {
             let p_sum  = pentagonal_nums[i as usize] + pentagonal_nums[j as usize];
             let p_diff = pentagonal_nums[j as usize] - pentagonal_nums[i as usize];
-            println!("({i}, {j}): sum = {p_sum}, diff = {p_diff}");
+            // TOOD: Use a HashSet to speed up this check.
+            //if p_sum in pentagonal_nums and p_diff in pentagonal_nums {
+            if pentagonal_nums.contains(&p_sum) && pentagonal_nums.contains(&p_diff) {
+                if p_diff < result {
+                    result = p_diff;
+                }
+                println!("({i}, {j}): sum = {p_sum}, diff = {p_diff}");
+            }
         }
     }
 
@@ -65,6 +75,5 @@ fn main() {
 
     println!("answer: {answer}");
     println!("run time: {:.2?}", run_time);
-
 }
 

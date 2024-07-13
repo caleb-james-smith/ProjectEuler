@@ -13,8 +13,36 @@
 
 from Solver import Solver
 
+def P(n):
+    result = n * (3 * n - 1) / 2 
+    result = int(result)
+    return result 
+
 def solve(num):
     print("Go go go!")
+    max_n = int(3e3)
+    result = 1e9
+
+    print("max_n: {0}".format(max_n))
+    
+    # get pentagonal numbers
+    pentagonal_nums = [P(n) for n in range(1, max_n + 1)]
+    
+    # print pentagonal numbers
+    #for i, p in enumerate(pentagonal_nums): 
+    #    n = i + 1
+    #    print("{0}: {1}".format(n, p))
+
+    for i in range(max_n):
+        for j in range(i + 1, max_n):
+            p_sum  = pentagonal_nums[i] + pentagonal_nums[j]
+            p_diff = pentagonal_nums[j] - pentagonal_nums[i]
+            if p_sum in pentagonal_nums and p_diff in pentagonal_nums:
+                if p_diff < result:
+                    result = p_diff
+                print("({0}, {1}): sum = {2}, diff = {3}".format(i, j, p_sum, p_diff))
+    return result
+
 
 def main():
     solver = Solver(solve,0)

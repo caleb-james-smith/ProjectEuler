@@ -37,8 +37,10 @@ def solve(num):
     # record the minimal difference 
     for i in range(max_n):
         for j in range(i + 1, max_n):
+            # calculate the sum and difference
             p_sum  = pentagonal_nums[i] + pentagonal_nums[j]
             p_diff = pentagonal_nums[j] - pentagonal_nums[i]
+            # require that the sum and difference are pentagonal numbers 
             if p_sum in pentagonal_nums and p_diff in pentagonal_nums:
                 if p_diff < result:
                     result = p_diff

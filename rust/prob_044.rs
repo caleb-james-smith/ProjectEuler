@@ -11,7 +11,9 @@
 // Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference are pentagonal
 // and D = |Pk − Pj| is minimised; what is the value of D?
 
+// import standard library types
 use std::time::Instant;
+use std::collections::HashSet;
 
 // Calculate pentagonal number P(n)
 fn P(n: i32) -> i32 {
@@ -31,14 +33,15 @@ fn solve() -> i32 {
     println!("max_n: {max_n}");
     
     // get pentagonal numbers
-    //let mut pentagonal_nums: Vec<i32> = Vec::new();
-    let mut pentagonal_nums: Vec<i32> = vec![];
+    let mut pentagonal_nums_vec: Vec<i32> = Vec::new();
     for n in 1..(max_n+1) {
-        pentagonal_nums.push(P(n));
+        pentagonal_nums_vec.push(P(n));
     }
+    // convert Vec into HashSet for very fast membership checks
+    let pentagonal_nums_set: HashSet<_> = pentagonal_nums_vec.iter().cloned().collect();
     
     // print pentagonal numbers
-    //for (i, p) in pentagonal_nums.iter().enumerate() {
+    //for (i, p) in pentagonal_nums_vec.iter().enumerate() {
     //    let n = i + 1;
     //    println!("P({n}) = {p}");
     //}
@@ -47,11 +50,12 @@ fn solve() -> i32 {
     // record the minimal difference
     for i in 0..max_n {
         for j in (i+1)..max_n {
-            let p_sum  = pentagonal_nums[i as usize] + pentagonal_nums[j as usize];
-            let p_diff = pentagonal_nums[j as usize] - pentagonal_nums[i as usize];
-            // TOOD: Use a HashSet to speed up this check.
-            //if p_sum in pentagonal_nums and p_diff in pentagonal_nums {
-            if pentagonal_nums.contains(&p_sum) && pentagonal_nums.contains(&p_diff) {
+            // calculate the sum and difference
+            let p_sum  = pentagonal_nums_vec[i as usize] + pentagonal_nums_vec[j as usize];
+            let p_diff = pentagonal_nums_vec[j as usize] - pentagonal_nums_vec[i as usize];
+            // require that the sum and difference are pentagonal numbers
+            // Note: Membership checks are much faster using HashSets compared to Vecs!!
+            if pentagonal_nums_set.contains(&p_sum) && pentagonal_nums_set.contains(&p_diff) {
                 if p_diff < result {
                     result = p_diff;
                 }

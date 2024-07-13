@@ -11,6 +11,8 @@
 // Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference are pentagonal
 // and D = |Pk − Pj| is minimised; what is the value of D?
 
+use std::time::Instant;
+
 // Calculate pentagonal number P(n)
 fn P(n: i32) -> i32 {
     let result: i32 = n * (3 * n - 1) / 2;
@@ -28,7 +30,7 @@ fn solve() -> i32 {
     // get pentagonal numbers
     //let mut pentagonal_nums: Vec<i32> = Vec::new();
     let mut pentagonal_nums: Vec<i32> = vec![];
-    for n in 1..max_n+1 {
+    for n in 1..(max_n+1) {
         pentagonal_nums.push(P(n));
     }
     
@@ -37,13 +39,32 @@ fn solve() -> i32 {
         let n = i + 1;
         println!("P({n}) = {p}");
     }
-    
+
+    // search for pairs of pentagonal numbers that meet the requirements
+    // record the minimal difference
+    for i in 0..max_n {
+        for j in (i+1)..max_n {
+            let p_sum  = pentagonal_nums[i as usize] + pentagonal_nums[j as usize];
+            let p_diff = pentagonal_nums[j as usize] - pentagonal_nums[i as usize];
+            println!("({i}, {j}): sum = {p_sum}, diff = {p_diff}");
+        }
+    }
+
     result
 }
 
 // This is the main function.
 fn main() {
+    let start_time = Instant::now();
+
     let answer: i32 = solve();
+
+    let end_time = Instant::now();
+
+    let run_time = end_time.duration_since(start_time);
+
     println!("answer: {answer}");
+    println!("run time: {:.2?}", run_time);
+
 }
 

@@ -12,26 +12,28 @@
 use std::time::Instant;
 
 // Solve the problem
-fn solve(max_val: i32) -> i32 {
-    println!("Go go go!");
+fn solve(max_n: i32) -> i32 {
+    println!("Running solve()... go go go!");
+    println!("max_n: {max_n}");
     
     // Since we plan to change result, we need to make it mutable using "mut".
     let mut result: i32 = 0;
     
-    for n in 1..max_val {
+    for n in 1..max_n {
         if n % 3 == 0 || n % 5 == 0 {
             result += n;
         }
     }
+    println!("Completed solve()!");
     result
 }
 
 // This is the main function.
 fn main() {
-    let start_time = Instant::now();
-    let max_val: i32 = 1_000;
-    let answer: i32  = solve(max_val);
-    let end_time = Instant::now();
+    let start_time  = Instant::now();
+    let max_n: i32  = 1_000;
+    let answer: i32 = solve(max_n);
+    let end_time    = Instant::now();
     
     let run_time = end_time.duration_since(start_time);
 

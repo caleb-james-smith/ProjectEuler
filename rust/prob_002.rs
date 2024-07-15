@@ -22,7 +22,22 @@ fn solve(max_n: i32) -> i32 {
     
     // Since we plan to change result, we need to make it mutable using "mut".
     let mut result: i32 = 0;
+
+    let mut x1: i32 = 1;
+    let mut x2: i32 = 2;
+    let mut x3: i32 = x1 + x2;
     
+    result += x2;
+
+    while x3 <= max_n {
+        if x3 % 2 == 0 {
+            result += x3;
+        }
+        x1 = x2;
+        x2 = x3;
+        x3 = x1 + x2;
+    } 
+
     println!("Completed solve()!");
     result
 }
@@ -30,7 +45,7 @@ fn solve(max_n: i32) -> i32 {
 // This is the main function.
 fn main() {
     let start_time  = Instant::now();
-    let max_n: i32  = 1_000;
+    let max_n: i32  = 4_000_000;
     let answer: i32 = solve(max_n);
     let end_time    = Instant::now();
     

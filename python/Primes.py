@@ -6,7 +6,7 @@ class Primes:
     def __init__(self):
         self.primes = []
 
-    # find number of divisors
+    # find divisors of a number
     def divisors(self, number):
         divs = [x for x in range(1, number//2 + 1) if number % x == 0]
         divs.append(number)

@@ -13,8 +13,8 @@ fn divisors(number: i32) -> Vec<i32> {
 }
 
 // determine if a number is prime
-fn isPrime(number: i32) -> bool {
-    if number == 1 {
+fn is_prime(number: i32) -> bool {
+    if number <= 1 {
         return false;
     }
     let divs = divisors(number);
@@ -25,22 +25,38 @@ fn isPrime(number: i32) -> bool {
     }
 }
 
-// Test primes
-fn testPrimes(max_n: i32) {
+// Primes: test 1
+fn primes_test_1(max_n: i32) {
     for n in 1..(max_n + 1) {
         let divs: Vec<i32> = divisors(n);
-        let is_prime = isPrime(n);
-        println!("n: {:?}, divisors: {:?}, prime: {:?}", n, divs, is_prime);
+        let n_is_prime = is_prime(n);
+        //println!("n: {:?}, divisors: {:?}, prime: {:?}", n, divs, n_is_prime);
+        println!("n: {:?}, n_divs: {:?}, prime: {:?}", n, divs.len(), n_is_prime);
     }
 }
 
+// Primes: test 2
+fn primes_test_2(max_n: i32) {
+    let primes: Vec<i32> = get_primes_basic(max_n);
+    println!("max_n: {:?}", max_n);
+    println!("n_primes: {:?}", primes.len());
+    //println!("primes: {:?}", primes);
+}
+
+// Get primes: basic method
+fn get_primes_basic(max_n: i32) -> Vec<i32> {
+    let mut primes: Vec<i32> = Vec::new();
+    for n in 1..(max_n + 1) {
+        if is_prime(n) {
+            primes.push(n);
+        }
+    }
+    primes
+}
+
 // This is the main function.
-fn main() {
-    // let number: i32 = 24;
-    // let divs: Vec<i32> = divisors(number);
-    // let is_prime = isPrime(number);
-    // println!("number: {:?}, divisors: {:?}, prime: {:?}", number, divs, is_prime);
-    
-    let max_n: i32 = 100;
-    testPrimes(max_n);
+fn main() {    
+    let max_n: i32 = 1_000_000;
+    //primes_test_1(max_n);
+    primes_test_2(max_n);
 }

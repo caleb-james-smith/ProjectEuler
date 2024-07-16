@@ -30,6 +30,7 @@ class Primes:
         # no divisors up to square root of number
         return False
     
+    # determine if a number is prime
     def isPrime(self, number, values=[]):
         # note: 1 is not prime
         if number == 1:

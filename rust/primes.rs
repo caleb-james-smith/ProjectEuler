@@ -1,5 +1,8 @@
 // primes.rs
 
+// import standard library types
+use std::time::Instant;
+
 // find divisors of a number
 fn divisors(number: i32) -> Vec<i32> {
     let mut divs: Vec<i32> = Vec::new();
@@ -27,6 +30,7 @@ fn is_prime(number: i32) -> bool {
 
 // Primes: test 1
 fn primes_test_1(max_n: i32) {
+    println!("Running primes_test_1().");
     for n in 1..(max_n + 1) {
         let divs: Vec<i32> = divisors(n);
         let n_is_prime = is_prime(n);
@@ -37,13 +41,23 @@ fn primes_test_1(max_n: i32) {
 
 // Primes: test 2
 fn primes_test_2(max_n: i32) {
+    println!("Running primes_test_2().");
     let primes: Vec<i32> = get_primes_basic(max_n);
     println!("max_n: {:?}", max_n);
     println!("n_primes: {:?}", primes.len());
     //println!("primes: {:?}", primes);
 }
 
-// Get primes: basic method
+// Primes: test 3
+fn primes_test_3(max_n: i32) {
+    println!("Running primes_test_3().");
+    let primes: Vec<i32> = get_primes_advanced(max_n);
+    println!("max_n: {:?}", max_n);
+    println!("n_primes: {:?}", primes.len());
+    //println!("primes: {:?}", primes);
+}
+
+// Get primes: basic method: counting divisors
 fn get_primes_basic(max_n: i32) -> Vec<i32> {
     let mut primes: Vec<i32> = Vec::new();
     for n in 1..(max_n + 1) {
@@ -54,9 +68,51 @@ fn get_primes_basic(max_n: i32) -> Vec<i32> {
     primes
 }
 
+// Get primes: advanced method: Sieve of Eratosthenes
+fn get_primes_advanced(max_n: i32) -> Vec<i32> {
+    let mut primes: Vec<i32> = Vec::new();
+    
+    // Start with all numbers assigned True for prime.
+    // Assign False to numbers that are divisible by a prime.
+    // At the end, numbers still assigned True are prime.
+    let mut is_prime_list: Vec<bool> = vec![true; (max_n + 1) as usize];
+    is_prime_list[0] = false;
+    is_prime_list[1] = false;
+    // Start with the first prime number, 2.
+    // Keep iterating as long as i^2 <= max_n.
+    let mut i: i32 = 2;
+    while i*i <= max_n {
+        //println!("i: {}", i);
+        if is_prime_list[i as usize] {
+            for j in ((i*i)..(max_n+1)).step_by(i as usize) {
+                is_prime_list[j as usize] = false;
+            }
+        }
+        i += 1;
+    }
+
+    // Collect primes.
+    for (i, &is_p) in is_prime_list.iter().enumerate() {
+        //println!("i: {}, is_p: {}", i, is_p);
+        if is_p {
+            primes.push(i as i32);
+        }
+    }
+
+    primes
+}
+
 // This is the main function.
-fn main() {    
-    let max_n: i32 = 1_000_000;
+fn main() {
+    let start_time  = Instant::now();
+    //let max_n: i32  = 1_000_000;
+    let max_n: i32  = 1_000_000_000;
     //primes_test_1(max_n);
-    primes_test_2(max_n);
+    //primes_test_2(max_n);
+    primes_test_3(max_n);
+    let end_time    = Instant::now();
+
+    let run_time = end_time.duration_since(start_time);
+
+    println!("run time: {:.2?}", run_time);
 }

@@ -57,6 +57,16 @@ fn primes_test_3(max_n: i32) {
     //println!("primes: {:?}", primes);
 }
 
+// Prime factors: test 1
+fn prime_factors_test_1(max_n: i32) {
+    println!("Running prime_factors_test_1().");
+    let primes: Vec<i32> = get_primes_advanced(max_n);
+    for n in 1..(max_n + 1) {
+        let prime_factors: Vec<i32> = get_prime_factors(n, primes.clone());
+        println!("n: {:?}, prime factors: {:?}", n, prime_factors);
+    }
+}
+
 // Get primes: basic method: counting divisors
 fn get_primes_basic(max_n: i32) -> Vec<i32> {
     let mut primes: Vec<i32> = Vec::new();
@@ -103,21 +113,29 @@ fn get_primes_advanced(max_n: i32) -> Vec<i32> {
 }
 
 // get prime factors of a number
-// only keep one of each prime; do not record "power" of each prime
+// only keep one of each prime factor; do not record power of each prime
 fn get_prime_factors(number: i32, primes: Vec<i32>) -> Vec<i32> {
     let mut prime_factors: Vec<i32> = Vec::new();
     let mut i: i32 = 0;
+    while (i as usize) < primes.len() && primes[i as usize] <= number {
+        if number % primes[i as usize] == 0 {
+            prime_factors.push(primes[i as usize]);
+        }
+        i += 1;
+    }
     prime_factors
 }
 
 // This is the main function.
 fn main() {
     let start_time  = Instant::now();
+    let max_n: i32  = 100;
     //let max_n: i32  = 1_000_000;
-    let max_n: i32  = 1_000_000_000;
+    //let max_n: i32  = 1_000_000_000;
     //primes_test_1(max_n);
     //primes_test_2(max_n);
-    primes_test_3(max_n);
+    //primes_test_3(max_n);
+    prime_factors_test_1(max_n);
     let end_time    = Instant::now();
 
     let run_time = end_time.duration_since(start_time);

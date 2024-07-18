@@ -102,6 +102,14 @@ fn get_primes_advanced(max_n: i32) -> Vec<i32> {
     primes
 }
 
+// get prime factors of a number
+// only keep one of each prime; do not record "power" of each prime
+fn get_prime_factors(number: i32, primes: Vec<i32>) -> Vec<i32> {
+    let mut prime_factors: Vec<i32> = Vec::new();
+    let mut i: i32 = 0;
+    prime_factors
+}
+
 // This is the main function.
 fn main() {
     let start_time  = Instant::now();

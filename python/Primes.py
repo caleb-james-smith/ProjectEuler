@@ -6,7 +6,7 @@ class Primes:
     def __init__(self):
         self.primes = []
 
-    # find number of divisors
+    # find divisors of a number
     def divisors(self, number):
         divs = [x for x in range(1, number//2 + 1) if number % x == 0]
         divs.append(number)
@@ -30,6 +30,7 @@ class Primes:
         # no divisors up to square root of number
         return False
     
+    # determine if a number is prime
     def isPrime(self, number, values=[]):
         # note: 1 is not prime
         if number == 1:
@@ -65,19 +66,24 @@ class Primes:
         elif max_val == 1:
             self.setPrimes([])
             return
-        # start with all numbers assigned True for prime
-        # assign False to numbers that are divisible 
-        # at the end, numbers still assigned True are prime
+        
+        # Start with all numbers assigned True for prime.
+        # Assign False to numbers that are divisible by a prime.
+        # At the end, numbers still assigned True are prime.
         is_prime_list = max_val * [True]
         is_prime_list[0] = False 
         is_prime_list[1] = False 
-        # check up to square root of number
+        # Start with the first prime number, 2.
+        # Keep iterating up to square root of max value.
         for i in range(2, int(np.sqrt(max_val)) + 1):
             if is_prime_list[i]:
                 # start from i^2 to save time
                 for j in range(i**2, max_val, i):
                     is_prime_list[j] = False
+        
+        # Collect primes.
         primes = [i for i in range(len(is_prime_list)) if is_prime_list[i]] 
+        
         self.setPrimes(primes)
 
     def setPrimes(self, primes):

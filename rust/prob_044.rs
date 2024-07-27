@@ -22,16 +22,13 @@ fn P(n: i32) -> i32 {
 }
 
 // Solve the problem
-fn solve() -> i32 {
-    println!("Go go go!");
-    
-    // Since we plan to change result, we need to make it mutable using "mut"
-    let mut result: i32 = 1_000_000_000;
-    
-    let max_n: i32  = 3_000;
-    
+fn solve(max_n: i32) -> i32 {
+    println!("Running solve()... go go go!");
     println!("max_n: {max_n}");
     
+    // Since we plan to change result, we need to make it mutable using "mut".
+    let mut result: i32 = 1_000_000_000;
+
     // get pentagonal numbers
     let mut pentagonal_nums_vec: Vec<i32> = Vec::new();
     for n in 1..(max_n+1) {
@@ -63,17 +60,16 @@ fn solve() -> i32 {
             }
         }
     }
-
+    println!("Completed solve()!");
     result
 }
 
 // This is the main function.
 fn main() {
-    let start_time = Instant::now();
-
-    let answer: i32 = solve();
-
-    let end_time = Instant::now();
+    let start_time  = Instant::now();
+    let max_n: i32  = 3_000;
+    let answer: i32 = solve(max_n);
+    let end_time    = Instant::now();
 
     let run_time = end_time.duration_since(start_time);
 

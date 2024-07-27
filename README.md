@@ -10,7 +10,7 @@ python3 python/prob_003.py
 ```
 
 Example of running Rust code using rustc to compile.
-Here, we are using the compiler flags `-O -C opt-level=3` to optimize performance.
+Here, we are using the compiler flags `-O -C opt-level=3 -C lto` to optimize performance.
 ```
 cd rust
 rustc -O -C opt-level=3 -C lto prob_044.rs

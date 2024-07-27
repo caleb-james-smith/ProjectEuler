@@ -10,7 +10,7 @@
 // 
 
 // import standard library types
-use std::time::Instant;
+//use std::time::Instant;
 
 // import modules
 use crate::primes;
@@ -29,7 +29,8 @@ fn solve(number: i64) -> i64 {
     let prime_numbers: Vec<i64> = primes::get_primes_advanced(max_n);
     let prime_factors: Vec<i64> = primes::get_prime_factors(number, prime_numbers.clone());
 
-    // figure out how to get max value of vector
+    // get max value of vector
+    let max_value: Option<&i64> = prime_factors.iter().max();
 
     println!("number: {number}");
     println!("prime factors: {:?}", prime_factors);
@@ -38,15 +39,15 @@ fn solve(number: i64) -> i64 {
     result
 }
 
-// This is the main function.
-pub fn main() {
-    let start_time  = Instant::now();
+// Run the calculation for this problem.
+pub fn run() {
+    //let start_time  = Instant::now();
     let number: i64  = 600851475143;
     let answer: i64 = solve(number);
-    let end_time    = Instant::now();
+    //let end_time    = Instant::now();
     
-    let run_time = end_time.duration_since(start_time);
+    //let run_time = end_time.duration_since(start_time);
 
     println!("answer: {answer}");
-    println!("run time: {:.2?}", run_time);
+    //println!("run time: {:.2?}", run_time);
 }

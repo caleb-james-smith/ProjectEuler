@@ -21,6 +21,7 @@ fn main() {
     let min_value: Option<&i32> = my_vec.iter().min();
     let max_value: Option<&i32> = my_vec.iter().max();
 
+    // Set min value
     match min_value {
         Some(&min) => {
             println!("The minimum value is {}.", min);
@@ -29,6 +30,7 @@ fn main() {
         None => println!("The vector is empty."),
     }
     
+    // Set max value
     match max_value {
         Some(&max) => {
             println!("The maximum value is {}.", max);

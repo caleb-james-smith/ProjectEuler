@@ -23,18 +23,18 @@ fn main() {
 
     match min_value {
         Some(&min) => {
-            println!("The minimum value is {}", min);
+            println!("The minimum value is {}.", min);
             my_min_value = min;
         }
-        None => println!("The vector is empty"),
+        None => println!("The vector is empty."),
     }
     
     match max_value {
         Some(&max) => {
-            println!("The maximum value is {}", max);
+            println!("The maximum value is {}.", max);
             my_max_value = max;
         }
-        None => println!("The vector is empty"),
+        None => println!("The vector is empty."),
     }
     
     println!("my_min_value: {:?}", my_min_value);

@@ -9,12 +9,18 @@ Example of running python code:
 python3 python/prob_003.py
 ```
 
-Example of running Rust code.
+Example of running Rust code using rustc to compile.
 Here, we are using the compiler flags `-O -C opt-level=3` to optimize performance.
 ```
 cd rust
 rustc -O -C opt-level=3 -C lto prob_044.rs
 ./prob_044
+```
+
+Example of running Rust code using cargo to compile and run.
+```
+cd rust_project
+cargo run
 ```
 
 Example of running C++ code.

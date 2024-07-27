@@ -131,7 +131,7 @@ fn main() {
     let start_time  = Instant::now();
     let max_n: i64  = 100;
     //let max_n: i64  = 1_000_000;
-    //let max_n: i32  = 1_000_000_000;
+    //let max_n: i64  = 1_000_000_000;
     //primes_test_1(max_n);
     //primes_test_2(max_n);
     //primes_test_3(max_n);

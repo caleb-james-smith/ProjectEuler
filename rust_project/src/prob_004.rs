@@ -23,7 +23,7 @@ fn palindrome(number: i64) -> bool {
 }
 
 // Solve the problem
-fn solve(number: i64) -> i64 {
+fn solve() -> i64 {
     println!("Running solve()...");
     
     // Since we plan to change result, we need to make it mutable using "mut".
@@ -55,7 +55,6 @@ fn solve(number: i64) -> i64 {
 // Run the calculation for this problem
 pub fn run() {
     println!("Running run()... go go go!");
-    let number: i64  = 1;
-    let answer: i64 = solve(number);
+    let answer: i64 = solve();
     println!("answer: {answer}");
 }

@@ -40,7 +40,7 @@ fn solve() -> i64 {
             let is_palindrome: bool = palindrome(product);
             //println!("(i, j) = ({i}, {j}): product = {product}, is_palindrome = {is_palindrome}");
             if is_palindrome {
-                println!("(i, j) = ({i}, {j}): product = {product}, is_palindrome = {is_palindrome}");
+                //println!("(i, j) = ({i}, {j}): product = {product}, is_palindrome = {is_palindrome}");
                 if product > result {
                     result = product;
                 }
@@ -54,7 +54,8 @@ fn solve() -> i64 {
 
 // Run the calculation for this problem
 pub fn run() {
-    println!("Running run()... go go go!");
+    println!("Solving Problem 4.");
+    println!("Running run()...");
     let answer: i64 = solve();
     println!("answer: {answer}");
 }

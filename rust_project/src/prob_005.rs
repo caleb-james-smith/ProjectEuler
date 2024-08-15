@@ -38,7 +38,8 @@ fn solve(number: i64) -> i64 {
 
 // Run the calculation for this problem
 pub fn run() {
-    println!("Running run()... go go go!");
+    println!("Solving Problem 5.");
+    println!("Running run()...");
     let number: i64  = 20;
     let answer: i64 = solve(number);
     println!("answer: {answer}");

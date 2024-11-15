@@ -29,10 +29,13 @@
 # Account for leap year.
 # Calculate days between two dates (if it is useful).
 
+# Full moon calculation:
+# https://en.wikipedia.org/wiki/Full_moon
+
 import datetime
 
 # Get ordered list of full moon dates for a given year >= 2000
-def getFullMoonDates(target_year):
+def getYearFullMoonDatesV1(target_year):
     dates = []
     moon_orbit = 29.53
     full_moon_date = "2000-01-20"
@@ -56,16 +59,49 @@ def getFullMoonDates(target_year):
     
     return dates
 
+# Calculate days until the n_th full moon with respect to January 1, 2000
+def calcDaysToFullMoon(n):
+    d = 20.362000 + 29.530588861 * n + 102.026e-12 * (n ** 2)
+    return d
+
+# Get ordered list of full moon dates (length max_n) starting from January 1, 2000
+def getFullMoonDates(max_n):
+    dates = []
+    start_date = "2000-01-01"
+    d1 = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    for n in range(max_n):
+        days = calcDaysToFullMoon(n)
+        d2 = d1 + datetime.timedelta(days=days)
+        date = d2.strftime("%Y-%m-%d")
+        dates.append(date)
+    return dates
+
+# Get ordered list of full moon dates for a given year >= 2000
+def getYearFullMoonDatesV2(full_moon_dates, target_year):
+    dates = [x for x in full_moon_dates if str(target_year) in x]
+    return dates
+
 # given year (yyyy), return date of Easter (yyyy-mm-dd)
 def getEasterDate(year):
     date = ""
     
     # get ordered list of full moon dates for this year
-    full_moon_dates = getFullMoonDates(year)
-    print(f"full_moon_dates: {full_moon_dates}")
+    #year_full_moon_dates = getYearFullMoonDatesV1(year)
+    #print(f"year_full_moon_dates: {year_full_moon_dates}")
+    
+    # get ordered list (length max_n) of full moon dates for this year
+    # max_n is the number of full moons
+    # Note: datetime.MINYEAR = 1 and datetime.MAXYEAR = 9999
+    # - max_n = 1e5 will exceed MAXYEAR 
+    # - max_n = 9e4 will not exceed MAXYEAR
+    max_n = int(9e4)
+    full_moon_dates = getFullMoonDates(max_n)
+    year_full_moon_dates = getYearFullMoonDatesV2(full_moon_dates, year)
+    #print(f"full_moon_dates: {full_moon_dates}")
+    print(f"year_full_moon_dates: {year_full_moon_dates}")
 
     # return empty string if there are no full moon dates 
-    if not full_moon_dates:
+    if not year_full_moon_dates:
         return date
     
     # get date of full moon on or after equinox
@@ -73,7 +109,7 @@ def getEasterDate(year):
     d1 = datetime.datetime.strptime(equinox_date, "%Y-%m-%d")
     d2 = None
     full_moon_date = ""
-    for full_moon_date in full_moon_dates:
+    for full_moon_date in year_full_moon_dates:
         d2 = datetime.datetime.strptime(full_moon_date, "%Y-%m-%d")
         diff = d2 - d1
         if diff.days >= 0:

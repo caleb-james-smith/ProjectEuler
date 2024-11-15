@@ -41,7 +41,7 @@ def getYearFullMoonDatesV1(target_year):
     full_moon_date = "2000-01-20"
     year = 2000
     
-    # return empty list for target_year <= 2000
+    # return empty list for target_year < 2000
     if target_year < year:
         return dates
     
@@ -60,8 +60,9 @@ def getYearFullMoonDatesV1(target_year):
     return dates
 
 # Calculate days until the n_th full moon with respect to January 1, 2000
+# Include correction for Universal Time (UT)
 def calcDaysToFullMoon(n):
-    d = 20.362000 + 29.530588861 * n + 102.026e-12 * (n ** 2)
+    d = 20.362000 + 29.530588861 * n + 102.026e-12 * (n ** 2) - 0.000739 - 235e-12 * (n ** 2)
     return d
 
 # Get ordered list of full moon dates (length max_n) starting from January 1, 2000
@@ -78,6 +79,10 @@ def getFullMoonDates(max_n):
 
 # Get ordered list of full moon dates for a given year >= 2000
 def getYearFullMoonDatesV2(full_moon_dates, target_year):
+    dates = []
+    # return empty list for target_year < 2000
+    if target_year < 2000:
+        return dates
     dates = [x for x in full_moon_dates if str(target_year) in x]
     return dates
 

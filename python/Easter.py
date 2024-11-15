@@ -103,7 +103,7 @@ def getEasterDate(year):
     full_moon_dates = getFullMoonDates(max_n)
     year_full_moon_dates = getYearFullMoonDatesV2(full_moon_dates, year)
     #print(f"full_moon_dates: {full_moon_dates}")
-    print(f"year_full_moon_dates: {year_full_moon_dates}")
+    #print(f"year_full_moon_dates: {year_full_moon_dates}")
 
     # return empty string if there are no full moon dates 
     if not year_full_moon_dates:
@@ -134,10 +134,12 @@ def getEasterDate(year):
 def main():
     print("Time to calculate the date of Easter!")
 
-    #year = 2000
     year = int(input("Enter year: "))
     date = getEasterDate(year)
-    print(f"year: {year}, date: {date}")
+    d1 = datetime.datetime.strptime(date, "%Y-%m-%d")
+    date_long = d1.strftime("%A, %B %d, %Y") 
+    #print(f"year: {year}, date: {date}")
+    print(f"Easter: {date_long}")
 
 if __name__ == "__main__":
     main()

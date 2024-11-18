@@ -136,10 +136,15 @@ def main():
 
     year = int(input("Enter year: "))
     date = getEasterDate(year)
-    d1 = datetime.datetime.strptime(date, "%Y-%m-%d")
-    date_long = d1.strftime("%A, %B %d, %Y") 
-    #print(f"year: {year}, date: {date}")
-    print(f"Easter: {date_long}")
+    # Confirm that date is not empty
+    if date:
+        d1 = datetime.datetime.strptime(date, "%Y-%m-%d")
+        date_long = d1.strftime("%A, %B %d, %Y") 
+        #print(f"year: {year}, date: {date}")
+        print(f"Easter: {date_long}")
+    else:
+        print(f"ERROR: Cannot calculate Easter date for year {year}.")
+        print("Please enter a year in the range [2000, 9000].")
 
 if __name__ == "__main__":
     main()
